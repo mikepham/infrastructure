@@ -12,7 +12,7 @@ nginx-proxy:
     - /var/run/docker.sock:/tmp/docker.sock:ro
 
 teamcity:
-  image: sjoerdmulder/teamcity:latest
+  build: ../images/teamcity
   container_name: teamcity
   environment:
     VIRTUAL_HOST: build.nativecode.com
@@ -21,6 +21,15 @@ teamcity:
   restart: always
   volumes:
     - /var/opt/dev-services/teamcity:/var/lib/teamcity
+
+teamcity-agent:
+  build: ../images/teamcity-agent
+  container_name: teamcity-agent
+  environment:
+    TEAMCITY_SERVER: 'https://build.nativecode.com'
+  links:
+    - teamcity
+  restart: always
 
 teamcity-data:
   image: postgres:latest
