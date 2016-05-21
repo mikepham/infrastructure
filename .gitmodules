@@ -1,6 +1,9 @@
-[submodule "images/teamcity-agent"]
-	path = images/teamcity-agent
-	url = git@github.com:nativecode-dev/teamcity-agent-docker.git
+[submodule "images/sinopia"]
+  path = images/sinopia
+  url = https://github.com/nativecode-dev/sinopia.git#v1.4.0
 [submodule "images/teamcity"]
 	path = images/teamcity
-	url = git@github.com:nativecode-dev/teamcity-docker.git
+	url = https://github.com/nativecode-dev/teamcity-docker.git#master
+[submodule "images/teamcity-agent"]
+	path = images/teamcity-agent
+	url = https://github.com/nativecode-dev/teamcity-agent-docker.git#master
