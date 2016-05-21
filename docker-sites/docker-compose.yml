@@ -1,0 +1,87 @@
+sites-proxy:
+  build: ../images/proxy
+  links:
+    - blog-mikepham-com
+    - mail-mikepham-com
+    - nativecode-com
+  ports:
+    - 80:80
+    - 443:443
+  restart: always
+  volumes:
+    - /var/opt/sites/certs:/etc/nginx/certs
+    - /var/run/docker.sock:/tmp/docker.sock:ro
+
+mail-mikepham-com:
+  environment:
+    HTTPS: 'OFF'
+    VIRTUAL_HOST: mail.mikepham.com
+  image: analogic/poste.io:latest
+  ports:
+    - 25:25
+    - 8025:80
+    - 44324:443
+    - 110:110
+    - 143:143
+    - 465:465
+    - 587:587
+    - 993:993
+    - 995:995
+  restart: always
+  volumes:
+    - /etc/localtime:/etc/localtime:ro
+    - /var/opt/sites/mail.mikepham.com/mail:/data
+
+blog-mikepham-com:
+  environment:
+    WORDPRESS_DB_HOST: blog-mikepham-com-db:3306
+    WORDPRESS_DB_NAME: blog
+    WORDPRESS_DB_PASSWORD: BZoDf308SVACLLGWz545
+    WORDPRESS_DB_USER: blog
+    VIRTUAL_HOST: blog.mikepham.com
+  image: wordpress:latest
+  links:
+    - blog-mikepham-com-db
+  ports:
+    - 81:80
+  restart: always
+  volumes:
+    - /var/opt/sites/blog.mikepham.com/wordpress:/var/www/html
+
+blog-mikepham-com-db:
+  environment:
+    MYSQL_DATABASE: blog
+    MYSQL_PASSWORD: BZoDf308SVACLLGWz545
+    MYSQL_ROOT_PASSWORD: UEe557eyENR798kQ54e6
+    MYSQL_USER: blog
+  image: mariadb:latest
+  restart: always
+  volumes:
+    - /var/opt/sites/blog.mikepham.com/db:/var/lib/mysql
+
+nativecode-com:
+  environment:
+    WORDPRESS_DB_HOST: nativecode-com-db:3306
+    WORDPRESS_DB_NAME: nativecode
+    WORDPRESS_DB_PASSWORD: n4KcB%404OHjluM7324s
+    WORDPRESS_DB_USER: nativecode
+    VIRTUAL_HOST: '*.nativecode.com'
+  image: wordpress:latest
+  links:
+    - nativecode-com-db
+  ports:
+    - 82:80
+  restart: always
+  volumes:
+    - /var/opt/sites/nativecode.com/wordpress:/var/www/html
+
+nativecode-com-db:
+  environment:
+    MYSQL_DATABASE: nativecode
+    MYSQL_PASSWORD: n4KcB%404OHjluM7324s
+    MYSQL_ROOT_PASSWORD: XvG0I84*VU4n*0637f!k
+    MYSQL_USER: nativecode
+  image: mariadb:latest
+  restart: always
+  volumes:
+    - /var/opt/sites/nativecode.com/db:/var/lib/mysql
