@@ -3,7 +3,7 @@
   url = https://github.com/nativecode-dev/sinopia.git#v1.4.0
 [submodule "images/teamcity"]
 	path = images/teamcity
-	url = https://github.com/nativecode-dev/teamcity-docker.git#master
+	url = https://github.com/nativecode-dev/teamcity-docker.git#9.1.7
 [submodule "images/teamcity-agent"]
 	path = images/teamcity-agent
 	url = https://github.com/nativecode-dev/teamcity-agent-docker.git#master
