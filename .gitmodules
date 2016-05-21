@@ -1,0 +1,3 @@
+[submodule "images/sinopia"]
+	path = images/sinopia
+	url = https://github.com/nativecode-dev/sinopia-docker.git
