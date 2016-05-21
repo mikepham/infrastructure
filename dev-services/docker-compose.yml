@@ -1,0 +1,34 @@
+nginx-proxy:
+  build: ../images/proxy
+  container_name: proxy
+  links:
+    - teamcity
+  ports:
+    - 80:80
+    - 443:443
+  restart: always
+  volumes:
+    - /var/opt/dev-services/certs:/etc/nginx/certs
+    - /var/run/docker.sock:/tmp/docker.sock:ro
+
+teamcity:
+  image: sjoerdmulder/teamcity:latest
+  container_name: teamcity
+  environment:
+    VIRTUAL_HOST: build.nativecode.com
+  links:
+    - teamcity-data
+  restart: always
+  volumes:
+    - /var/opt/dev-services/teamcity:/var/lib/teamcity
+
+teamcity-data:
+  image: postgres:latest
+  container_name: teamcity-data
+  environment:
+    PGDATA: teamcity
+    POSTGRES_PASSWORD: H3Ac2V7PKNVcob644Njs
+    POSTGRES_USER: teamcity
+  restart: always
+  volumes:
+    - /var/opt/dev-services/teamcity-data:/teamcity
