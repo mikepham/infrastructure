@@ -1,19 +1,14 @@
-# Pull base image.
-FROM node:argon
+FROM node:4.4.4
+MAINTAINER "Mike Pham (support@nativecode.com)"
 
-RUN mkdir /opt/sinopia/storage/cache -p
-RUN echo {"list":[],"secret":"c649864c562c335aa53ce9cd8f64681d05a2f25bbab4c7399bd0c5a9858d0d40"} > /opt/sinopia/storage/cache/.sinopia-db.json
-RUN chmod 777 /opt/sinopia/storage/cache/.sinopia-db.json
-
-ADD node_modules/sinopia /opt/sinopia
-ADD config.yaml /opt/sinopia/config.yaml
-
-WORKDIR /opt
-VOLUME /opt/sinopia/storage
-
-RUN chown daemon:daemon -R /opt/sinopia
+WORKDIR /opt/sinopia
+ADD conf/config.yaml /data/config.yaml
+ADD conf/.sinopia-db.json /data/packages/.sinopia-db.json
+RUN npm install sinopia --production --silent
 
 USER daemon
 EXPOSE 4873
 
-CMD ["/opt/sinopia/bin/sinopia"]
+VOLUME /data
+
+ENTRYPOINT ["/opt/sinopia/node_modules/sinopia/bin/sinopia", "-c", "/data/config.yaml"]
