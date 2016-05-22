@@ -1,6 +1,3 @@
-[submodule "images/sinopia"]
-	path = images/sinopia
-  url = git@github.com:nativecode-dev/sinopia-docker.git
 [submodule "images/teamcity"]
 	path = images/teamcity
 	url = https://github.com/nativecode-dev/teamcity-docker.git
