@@ -9,7 +9,7 @@ nginx-proxy:
     - 443:443
   restart: always
   volumes:
-    - /var/opt/infrastructure/data/services/certs:/etc/nginx/certs
+    - /usr/share/data-services/certs:/etc/nginx/certs
     - /var/run/docker.sock:/tmp/docker.sock:ro
 
 #sinopia:
@@ -19,7 +19,7 @@ nginx-proxy:
 #    VIRTUAL_HOST: npm.nativecode.com
 #  restart: always
 #  volumes:
-#    - /var/opt/infrastructure/data/services/sinopia:/opt/sinopia/storage
+#    - /usr/share/data-services/sinopia:/opt/sinopia/storage
 
 teamcity:
   build: ../images/teamcity
@@ -30,7 +30,7 @@ teamcity:
     - teamcity-data
   restart: always
   volumes:
-    - /var/opt/infrastructure/data/services/teamcity:/var/lib/teamcity
+    - /usr/share/data-services/teamcity:/var/lib/teamcity
 
 teamcity-agent:
   build: ../images/teamcity-agent
@@ -41,7 +41,7 @@ teamcity-agent:
     - teamcity
   restart: always
   volumes:
-    - /var/opt/infrastructure/data/services/teamcity-agent:/opt/buildAgent
+    - /usr/share/data-services/teamcity-agent:/opt/buildAgent
 
 teamcity-data:
   image: postgres:latest
@@ -52,4 +52,4 @@ teamcity-data:
     POSTGRES_USER: teamcity
   restart: always
   volumes:
-    - /var/opt/infrastructure/data/services/teamcity-data:/teamcity
+    - /usr/share/data-services/teamcity-data:/teamcity

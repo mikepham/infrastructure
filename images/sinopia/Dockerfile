@@ -1,14 +1,17 @@
-FROM node:4.4.4
+FROM node:0.10.45
 MAINTAINER "Mike Pham (support@nativecode.com)"
 
-WORKDIR /opt/sinopia
-ADD conf/config.yaml /data/config.yaml
-ADD conf/.sinopia-db.json /data/packages/.sinopia-db.json
-RUN npm install sinopia --production --silent
+ENV SINOPIA_PREFIX="https://localhost"
+
+RUN mkdir -p /data/conf;
+RUN mkdir -p /data/default;
+RUN mkdir -p /data/packages;
+
+RUN npm install --global --prefix /data/sinopia --production --silent \
+  sinopia > /dev/null;
+
+RUN chown daemon:root /data -R;
 
 USER daemon
-EXPOSE 4873
-
-VOLUME /data
-
-ENTRYPOINT ["/opt/sinopia/node_modules/sinopia/bin/sinopia", "-c", "/data/config.yaml"]
+ADD docker-entrypoint.sh /docker-entrypoint.sh
+ENTRYPOINT ["/docker-entrypoint.sh"]

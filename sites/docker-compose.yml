@@ -9,7 +9,7 @@ sites-proxy:
     - 443:443
   restart: always
   volumes:
-    - /var/opt/sites/certs:/etc/nginx/certs
+    - /usr/share/data-sites/certs:/etc/nginx/certs
     - /var/run/docker.sock:/tmp/docker.sock:ro
 
 mail-mikepham-com:
@@ -30,7 +30,7 @@ mail-mikepham-com:
   restart: always
   volumes:
     - /etc/localtime:/etc/localtime:ro
-    - /var/opt/sites/mail.mikepham.com/mail:/data
+    - /usr/share/data-sites/mail.mikepham.com/mail:/data
 
 blog-mikepham-com:
   environment:
@@ -46,7 +46,7 @@ blog-mikepham-com:
     - 81:80
   restart: always
   volumes:
-    - /var/opt/sites/blog.mikepham.com/wordpress:/var/www/html
+    - /usr/share/data-sites/blog.mikepham.com/wordpress:/var/www/html
 
 blog-mikepham-com-db:
   environment:
@@ -57,7 +57,7 @@ blog-mikepham-com-db:
   image: mariadb:latest
   restart: always
   volumes:
-    - /var/opt/sites/blog.mikepham.com/db:/var/lib/mysql
+    - /usr/share/data-sites/blog.mikepham.com/db:/var/lib/mysql
 
 nativecode-com:
   environment:
@@ -73,7 +73,7 @@ nativecode-com:
     - 82:80
   restart: always
   volumes:
-    - /var/opt/sites/nativecode.com/wordpress:/var/www/html
+    - /usr/share/data-sites/nativecode.com/wordpress:/var/www/html
 
 nativecode-com-db:
   environment:
@@ -84,4 +84,4 @@ nativecode-com-db:
   image: mariadb:latest
   restart: always
   volumes:
-    - /var/opt/sites/nativecode.com/db:/var/lib/mysql
+    - /usr/share/data-sites/nativecode.com/db:/var/lib/mysql
