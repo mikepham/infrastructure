@@ -1,4 +1,4 @@
-storage: /data/packages
+storage: /data/sinopia/cache
 
 web:
   enable: true
@@ -6,7 +6,7 @@ web:
 
 auth:
   htpasswd:
-    file: /data/conf/htpasswd
+    file: /data/sinopia/.htpasswd
 
 uplinks:
   npmjs:
@@ -38,8 +38,8 @@ packages:
 
 listen: 0.0.0.0:4873
 max_body_size: 256mb
-url_prefix: {:PREFIX}
+url_prefix: {{PREFIX}}
 
 logs:
   - {type: stdout, format: pretty, level: http}
-#  - {type: file, path: /data/logs/sinopia.log, level: info}
+  - {type: file, path: /data/sinopia/logs/sinopia.log, level: info}

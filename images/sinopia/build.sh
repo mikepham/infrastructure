@@ -12,9 +12,8 @@ docker build -t test/sinopia:latest .;
 
 echo "Running container..."
 docker run --name test-sinopia \
-    --environment SINOPIA_PREFIX="https://www.test.com"
-    --volume /tmp/test-services/conf:/data/conf;
-    --volume /tmp/test-services/packages;/data/packages;
+    -e SINOPIA_PREFIX="https://www.test.com" \
+    --volume /tmp/test-services:/data/sinopia \
     --rm test/sinopia:latest;
 
 docker rm test-sinopia;
