@@ -5,6 +5,7 @@ MAINTAINER "Mike Pham (support@nativecode.com)"
 ENV SINOPIA_PREFIX https://localhost
 
 # Run package installer first so rebuilding the image is faster.
+RUN apt-get update ; apt-get -y install whois ; apt-get autoclean
 RUN npm install --global --prefix /opt/sinopia --production --silent sinopia > /dev/null
 RUN chown daemon:root -R /opt/sinopia
 RUN ln -s /opt/sinopia/bin/sinopia /usr/local/bin/sinopia

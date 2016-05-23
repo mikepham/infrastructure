@@ -17,6 +17,13 @@ if [ ! -d "/data/sinopia/logs" ]; then
   chown daemon:root /data/sinopia/logs;
 fi
 
+if [ ! -d "/opt/sinopia/htpasswd" ]; then
+  echo "admin:`mkpasswd --method=sha-512 admin`" >> /opt/sinopia/htpasswd
+  chown daemon:root /opt/sinopia/htpasswd;
+  chmod u=rw,g=rw,o=rw /opt/sinopia/htpasswd;
+  cat /opt/sinopia/htpasswd;
+fi
+
 echo "***********************************************************************************"
 echo "***********************************************************************************"
 cat /data/sinopia/config.yaml;
