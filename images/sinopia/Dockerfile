@@ -6,7 +6,7 @@ ENV SINOPIA_PREFIX https://localhost
 
 # Run package installer first so rebuilding the image is faster.
 RUN npm install --global --prefix /opt/sinopia --production --silent sinopia > /dev/null
-RUN chown daemon:root -R /opt/sinopia ; chown daemon:root -R /data
+RUN chown daemon:root -R /opt/sinopia
 RUN ln -s /opt/sinopia/bin/sinopia /usr/local/bin/sinopia
 
 # App contents.
@@ -17,6 +17,7 @@ ADD templates/.sinopia-db.json .sinopia-db.json
 
 # Expose ports and volumes.
 EXPOSE 4873
+RUN mkdir /data ; chown daemon:root /data
 VOLUME ["/data/sinopia"]
 
 # Run process.

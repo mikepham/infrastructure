@@ -8,8 +8,13 @@ fi
 
 if [ ! -d "/data/sinopia/cache" ]; then
   mkdir -p /data/sinopia/cache;
+  chown daemon:root /data/sinopia/cache;
   cat /opt/sinopia/conf.d/.sinopia-db.json >> /data/sinopia/cache/.sinopia-db.json;
-  chown daemon:root -R /data/sinopia/cache;
+fi
+
+if [ ! -d "/data/sinopia/logs" ]; then
+  mkdir -p /data/sinopia/logs;
+  chown daemon:root /data/sinopia/logs;
 fi
 
 echo "***********************************************************************************"
