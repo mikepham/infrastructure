@@ -2,7 +2,7 @@ nginx-proxy:
   build: ../images/proxy
   container_name: proxy
   links:
-#    - sinopia
+    - sinopia
     - teamcity
   ports:
     - 80:80
@@ -12,14 +12,15 @@ nginx-proxy:
     - /usr/share/data-services/certs:/etc/nginx/certs
     - /var/run/docker.sock:/tmp/docker.sock:ro
 
-#sinopia:
-#  build: ../images/sinopia
-#  container_name: sinopia
-#  environment:
-#    VIRTUAL_HOST: npm.nativecode.com
-#  restart: always
-#  volumes:
-#    - /usr/share/data-services/sinopia:/opt/sinopia/storage
+sinopia:
+  build: ../images/sinopia
+  container_name: sinopia
+  environment:
+    SINOPIA_PREFIX: 'https://npm.nativecode.com'
+    VIRTUAL_HOST: npm.nativecode.com
+  restart: always
+  volumes:
+    - /usr/share/data-services/sinopia:/data/sinopia
 
 teamcity:
   build: ../images/teamcity
