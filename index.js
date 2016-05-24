@@ -29,7 +29,7 @@ function files(path, results, matches, filter) {
     var resolved = $path.join(path, entry)
     var entryStat = $fs.lstatSync(resolved)
     if (entryStat && entryStat.isDirectory()) {
-      files(resolved, results, matches)
+      files(resolved, results, matches, filter)
     } else {
       var extension = $path.extname(entry)
       var name = $path.basename(entry, extension)
