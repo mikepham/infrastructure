@@ -6,10 +6,11 @@ const data = '/usr/share'
 
 /**
  * Filter callback when enumerating files, ignores directories.
+ * @callback: fileFilter
  * @param {string} name - name of the file without extension.
  * @param {string} extension - extension of the file, starts with a dot.
  * @param {string} path - complete path to the file.
- * @returns {object} either an object to add or falsy to ignore.
+ * @returns hash either an object to add or falsy to ignore.
  */
 
 /**
@@ -17,7 +18,7 @@ const data = '/usr/share'
  * @param {string} path - path to start looking.
  * @param {array} results - (optional) array of returned results.
  * @param {array} matches - (optional) array of file extensions to match.
- * @param {function} filter - (optional) function to filter results.
+ * @param {fileFilter} filter - (optional) function to filter results.
  */
 function files(path, results, matches, filter) {
   results = results || []
@@ -50,14 +51,14 @@ function files(path, results, matches, filter) {
  * Transforms a JSON object that represents a docker-compose file and
  * performs replacements.
  * @param {string} composerName - name of the composer file sans extension.
- * @param {object} json - docker-composer json representation.
+ * @param {hash} json - docker-composer json representation.
  */
 function transform(composerName, json) {
   const ignored = ['services', 'version', 'volumes']
 
   /**
-   * Transforms an environment object into an array.
-   * @param {object} image - image object.
+   * Transforms an environment hash into an array.
+   * @param {hash} image - image object.
    */
   function environments(image) {
     var environment = []
@@ -107,6 +108,9 @@ function transform(composerName, json) {
   }
 }
 
+/**
+ * Entry point to start generating files.
+ */
 $fs.lstat(conf, function (err, stat) {
   if (err || !stat.isDirectory()) {
     console.log('Infrastructure conf not available.')
