@@ -19,5 +19,8 @@
   "bugs": {
     "url": "https://github.com/mikepham/infrastructure/issues"
   },
-  "homepage": "https://github.com/mikepham/infrastructure#readme"
+  "homepage": "https://github.com/mikepham/infrastructure#readme",
+  "dependencies": {
+    "js-yaml": "^3.6.1"
+  }
 }
