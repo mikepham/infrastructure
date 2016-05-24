@@ -15,9 +15,7 @@ sites-proxy:
 
 mikepham-com-mail:
   container_name: mikepham-com-mail
-  environment:
-    HTTPS: 'OFF'
-    VIRTUAL_HOST: mail.mikepham.com
+  env_file: /etc/infrastructure/env/com.mikepham.mail.env
   image: analogic/poste.io:latest
   ports:
     - 25:25
@@ -36,12 +34,7 @@ mikepham-com-mail:
 
 mikepham-com:
   container_name: mikepham-com
-  environment:
-    WORDPRESS_DB_HOST: mikepham-com-db:3306
-    WORDPRESS_DB_NAME: blog
-    WORDPRESS_DB_PASSWORD: BZoDf308SVACLLGWz545
-    WORDPRESS_DB_USER: blog
-    VIRTUAL_HOST: mikepham.com,blog.mikepham.com,www.mikepham.com
+  env_file: /etc/infrastructure/env/com.mikepham.env
   image: wordpress:latest
   links:
     - mikepham-com-db
@@ -51,11 +44,7 @@ mikepham-com:
 
 mikepham-com-db:
   container_name: mikepham-com-db
-  environment:
-    MYSQL_DATABASE: blog
-    MYSQL_PASSWORD: BZoDf308SVACLLGWz545
-    MYSQL_ROOT_PASSWORD: UEe557eyENR798kQ54e6
-    MYSQL_USER: blog
+  env_file: /etc/infrastructure/env/com.mikepham.db.env
   image: mariadb:latest
   restart: always
   volumes:
@@ -63,12 +52,7 @@ mikepham-com-db:
 
 nativecode-com:
   container_name: nativecode-com
-  environment:
-    WORDPRESS_DB_HOST: nativecode-com-db:3306
-    WORDPRESS_DB_NAME: nativecode
-    WORDPRESS_DB_PASSWORD: n4KcB%404OHjluM7324s
-    WORDPRESS_DB_USER: nativecode
-    VIRTUAL_HOST: nativecode.com,www.nativecode.com
+  env_file: /etc/infrastructure/env/com.nativecode.env
   image: wordpress:latest
   links:
     - nativecode-com-db
@@ -78,11 +62,7 @@ nativecode-com:
 
 nativecode-com-db:
   container_name: nativecode-com-db
-  environment:
-    MYSQL_DATABASE: nativecode
-    MYSQL_PASSWORD: n4KcB%404OHjluM7324s
-    MYSQL_ROOT_PASSWORD: XvG0I84*VU4n*0637f!k
-    MYSQL_USER: nativecode
+  env_file: /etc/infrastructure/env/com.nativecode.db.env
   image: mariadb:latest
   restart: always
   volumes:
