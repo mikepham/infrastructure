@@ -24,6 +24,10 @@ if [ ! -d "/data/sinopia/htpasswd" ]; then
   cat /data/sinopia/htpasswd;
 fi
 
+if [ ! -L "/opt/sinopia/htpasswd" ]; then
+  ln -s /data/sinopia/htpasswd /opt/sinopia/htpasswd;
+fi
+
 echo "***********************************************************************************"
 echo "***********************************************************************************"
 cat /data/sinopia/config.yaml;
