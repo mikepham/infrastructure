@@ -5,6 +5,7 @@ Provides common docker images and docker-compose scripts that will configure mac
 ## Templates
 
 ### Development Services
+- proxy
 - sinopia
 - teamcity
 - teamcity agent
