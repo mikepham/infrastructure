@@ -1,5 +1,6 @@
 sites-proxy:
   build: ../images/proxy
+  container_name: proxy
   links:
     - blog-mikepham-com
     - mail-mikepham-com
@@ -13,6 +14,7 @@ sites-proxy:
     - /var/run/docker.sock:/tmp/docker.sock:ro
 
 mail-mikepham-com:
+  container_name: mail-mikepham-com
   environment:
     HTTPS: 'OFF'
     VIRTUAL_HOST: mail.mikepham.com
@@ -33,6 +35,7 @@ mail-mikepham-com:
     - /usr/share/data-sites/mail.mikepham.com/mail:/data
 
 blog-mikepham-com:
+  container_name: blog-mikepham-com
   environment:
     WORDPRESS_DB_HOST: blog-mikepham-com-db:3306
     WORDPRESS_DB_NAME: blog
@@ -49,6 +52,7 @@ blog-mikepham-com:
     - /usr/share/data-sites/blog.mikepham.com/wordpress:/var/www/html
 
 blog-mikepham-com-db:
+  container_name: blog-mikepham-com-db
   environment:
     MYSQL_DATABASE: blog
     MYSQL_PASSWORD: BZoDf308SVACLLGWz545
@@ -60,6 +64,7 @@ blog-mikepham-com-db:
     - /usr/share/data-sites/blog.mikepham.com/db:/var/lib/mysql
 
 nativecode-com:
+  container_name: nativecode-com
   environment:
     WORDPRESS_DB_HOST: nativecode-com-db:3306
     WORDPRESS_DB_NAME: nativecode
@@ -76,6 +81,7 @@ nativecode-com:
     - /usr/share/data-sites/nativecode.com/wordpress:/var/www/html
 
 nativecode-com-db:
+  container_name: nativecode-com-db
   environment:
     MYSQL_DATABASE: nativecode
     MYSQL_PASSWORD: n4KcB%404OHjluM7324s
