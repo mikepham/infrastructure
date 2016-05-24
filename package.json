@@ -1,7 +1,7 @@
 {
   "name": "infrastructure",
   "version": "1.0.0",
-  "description": "NativeCode Development Infrastructure Deployment",
+  "description": "NativeCode Infrastructure Deployment",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -14,7 +14,7 @@
     "infrastructure",
     "docker"
   ],
-  "author": "Mike Pham",
+  "author": "NativeCode (support@nativecode.com)",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/mikepham/infrastructure/issues"
