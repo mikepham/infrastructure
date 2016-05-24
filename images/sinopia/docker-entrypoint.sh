@@ -17,11 +17,11 @@ if [ ! -d "/data/sinopia/logs" ]; then
   chown daemon:root /data/sinopia/logs;
 fi
 
-if [ ! -d "/opt/sinopia/htpasswd" ]; then
-  echo "admin:`mkpasswd --method=sha-512 admin`" >> /opt/sinopia/htpasswd
-  chown daemon:root /opt/sinopia/htpasswd;
-  chmod u=rw,g=rw,o=rw /opt/sinopia/htpasswd;
-  cat /opt/sinopia/htpasswd;
+if [ ! -d "/data/sinopia/htpasswd" ]; then
+  echo "admin:`mkpasswd --method=sha-512 admin`" >> /data/sinopia/htpasswd
+  chown daemon:root /data/sinopia/htpasswd;
+  chmod u=rw,g=rw,o=rw /data/sinopia/htpasswd;
+  cat /data/sinopia/htpasswd;
 fi
 
 echo "***********************************************************************************"

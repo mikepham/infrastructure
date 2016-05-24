@@ -6,7 +6,7 @@ web:
 
 auth:
   htpasswd:
-    file: /opt/sinopia/htpasswd
+    file: /data/sinopia/htpasswd
 
 uplinks:
   npmjs:
