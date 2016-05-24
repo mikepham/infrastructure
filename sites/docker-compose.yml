@@ -2,8 +2,8 @@ sites-proxy:
   build: ../images/proxy
   container_name: proxy
   links:
-    - blog-mikepham-com
-    - mail-mikepham-com
+    - mikepham-com
+    - mikepham-com-mail
     - nativecode-com
   ports:
     - 80:80
@@ -13,8 +13,8 @@ sites-proxy:
     - /usr/share/data-sites/certs:/etc/nginx/certs
     - /var/run/docker.sock:/tmp/docker.sock:ro
 
-mail-mikepham-com:
-  container_name: mail-mikepham-com
+mikepham-com-mail:
+  container_name: mikepham-com-mail
   environment:
     HTTPS: 'OFF'
     VIRTUAL_HOST: mail.mikepham.com
@@ -32,27 +32,25 @@ mail-mikepham-com:
   restart: always
   volumes:
     - /etc/localtime:/etc/localtime:ro
-    - /usr/share/data-sites/mail.mikepham.com/mail:/data
+    - /usr/share/data-sites/mikepham.com/mail:/data
 
-blog-mikepham-com:
-  container_name: blog-mikepham-com
+mikepham-com:
+  container_name: mikepham-com
   environment:
-    WORDPRESS_DB_HOST: blog-mikepham-com-db:3306
+    WORDPRESS_DB_HOST: mikepham-com-db:3306
     WORDPRESS_DB_NAME: blog
     WORDPRESS_DB_PASSWORD: BZoDf308SVACLLGWz545
     WORDPRESS_DB_USER: blog
-    VIRTUAL_HOST: blog.mikepham.com
+    VIRTUAL_HOST: mikepham.com,blog.mikepham.com,www.mikepham.com
   image: wordpress:latest
   links:
-    - blog-mikepham-com-db
-  ports:
-    - 81:80
+    - mikepham-com-db
   restart: always
   volumes:
-    - /usr/share/data-sites/blog.mikepham.com/wordpress:/var/www/html
+    - /usr/share/data-sites/mikepham.com/wordpress:/var/www/html
 
-blog-mikepham-com-db:
-  container_name: blog-mikepham-com-db
+mikepham-com-db:
+  container_name: mikepham-com-db
   environment:
     MYSQL_DATABASE: blog
     MYSQL_PASSWORD: BZoDf308SVACLLGWz545
@@ -61,7 +59,7 @@ blog-mikepham-com-db:
   image: mariadb:latest
   restart: always
   volumes:
-    - /usr/share/data-sites/blog.mikepham.com/db:/var/lib/mysql
+    - /usr/share/data-sites/mikepham.com/db:/var/lib/mysql
 
 nativecode-com:
   container_name: nativecode-com
@@ -70,12 +68,10 @@ nativecode-com:
     WORDPRESS_DB_NAME: nativecode
     WORDPRESS_DB_PASSWORD: n4KcB%404OHjluM7324s
     WORDPRESS_DB_USER: nativecode
-    VIRTUAL_HOST: '*.nativecode.com'
+    VIRTUAL_HOST: nativecode.com,www.nativecode.com
   image: wordpress:latest
   links:
     - nativecode-com-db
-  ports:
-    - 82:80
   restart: always
   volumes:
     - /usr/share/data-sites/nativecode.com/wordpress:/var/www/html
