@@ -28,11 +28,10 @@ else
 fi
 
 ##
-# Download and make the update script executable.
-if [ ! -f "/usr/local/bin/infrastructure-update.sh" ]; then
-  wget -O /usr/local/bin/infrastructure-update.sh \
-    https://www.dropbox.com/s/kxx3h578i6bqzkl/infrastructure-update.sh?dl=0;
-  chmod +x /usr/local/bin/infrastructure-update.sh;
+# Symlink the script if it doesn't exist.
+if [ ! -L "/usr/local/bin/infrastructure" ]; then
+  echo "Creating symlink..."
+  ln -s /opt/infrastructure/infrastructure-update.sh /usr/local/bin/infrastructure;
 fi
 
 ##
