@@ -22,4 +22,4 @@ fi
 
 node /opt/infrastructure/index.js
 
-cd $PWD
+cd $CALLER_PATH
