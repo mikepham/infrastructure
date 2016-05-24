@@ -15,9 +15,7 @@ nginx-proxy:
 sinopia:
   build: ../images/sinopia
   container_name: sinopia
-  environment:
-    SINOPIA_PREFIX: 'https://npm.nativecode.com'
-    VIRTUAL_HOST: npm.nativecode.com
+  env_file: /etc/infrastructure/env/sinopia.env
   restart: always
   volumes:
     - /usr/share/data-services/sinopia:/data/sinopia
@@ -25,8 +23,7 @@ sinopia:
 teamcity:
   build: ../images/teamcity
   container_name: teamcity
-  environment:
-    VIRTUAL_HOST: build.nativecode.com
+  env_file: /etc/infrastructure/env/teamcity.env
   links:
     - teamcity-data
   restart: always
@@ -36,8 +33,7 @@ teamcity:
 teamcity-agent:
   build: ../images/teamcity-agent
   container_name: teamcity-agent
-  environment:
-    TEAMCITY_SERVER: 'https://build.nativecode.com'
+  env_file: /etc/infrastructure/env/teamcity-agent.env
   links:
     - teamcity
   restart: always
@@ -47,10 +43,7 @@ teamcity-agent:
 teamcity-data:
   image: postgres:latest
   container_name: teamcity-data
-  environment:
-    PGDATA: teamcity
-    POSTGRES_PASSWORD: H3Ac2V7PKNVcob644Njs
-    POSTGRES_USER: teamcity
+  env_file: /etc/infrastructure/env/teamcity-data.env
   restart: always
   volumes:
     - /usr/share/data-services/teamcity-data:/teamcity

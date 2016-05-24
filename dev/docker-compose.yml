@@ -1,2 +1,3 @@
 development:
   build: ../images/dev
+  container_name: dev
