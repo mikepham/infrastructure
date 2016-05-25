@@ -26,17 +26,17 @@ echo "  ASCII Art generated with http://bit.ly/1RoZOBn                          
 echo "-----------------------------------------------------------------------------";
 
 case "$1" in
-  "download")
+  "down"|"download")
     $BASEPATH/sync.sh download;
     exit $?;
   ;;
 
-  "generate")
+  "gen"|"generate")
     node $BASEPATH/index.js;
     exit $?;
   ;;
 
-  "remove")
+  "rm"|"remove")
     if [ -L "/usr/local/bin/infrastructure" ]; then
       LINK_INFRASTRUCTURE=$BINPATH/infrastructure;
       echo "Removing $LINK_INFRASTRUCTURE"
@@ -50,7 +50,7 @@ case "$1" in
     exit $?;
   ;;
 
-  "upload")
+  "up"|"upload")
     $BASEPATH/sync.sh upload;
     exit $?;
   ;;
