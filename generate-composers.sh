@@ -22,6 +22,8 @@ if [ ! -f "/usr/local/bin/dropbox" ]; then
   wget -O /usr/local/bin/dropbox \
     "https://raw.github.com/andreafabrizi/Dropbox-Uploader/master/dropbox_uploader.sh";
   chmod +x /usr/local/bin/dropbox;
+  echo "Plesure configure dropbox before continuing.";
+  exit 1;
 fi
 
 ##
@@ -46,6 +48,11 @@ if [ ! -L "/usr/local/bin/infrastructure" ]; then
   echo "Creating symlink..."
   ln -s /opt/infrastructure/infrastructure-update.sh /usr/local/bin/infrastructure;
 fi
+
+##
+# Try to upload anything in the infrastucture folder before continuing.
+echo "Saving existing configuration before running generator.";
+/usr/local/bin/infrastructure upload;
 
 ##
 # Run our generator that takes .composer JSON files and
