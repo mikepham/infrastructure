@@ -6,7 +6,7 @@ IPADDRESS=`ifconfig eth0 | grep 'inet addr:' | cut -d: -f2 | awk '{print $1}'`
 echo "Checking for dependencies...";
 which realpath > /dev/null;
 if [ $? -gt 0 ]; then
-  apt-get update;
+  apt-get update > /dev/null;
   apt-get install -y realpath;
 fi
 

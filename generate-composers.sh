@@ -2,6 +2,19 @@
 
 CALLER_PATH=$PWD
 
+if [ ! -L "/usr/local/bin/generate-composers" ]; then
+  SCRIPT=`realpath $0`
+  SCRIPTPATH=`dirname $SCRIPT`
+
+  ln -s $SCRIPTPATH/generate-composers.sh /usr/local/bin/generate-composers;
+fi
+
+if [ ! -L "/usr/local/bin/node" ]; then
+  apt-get update > /dev/null;
+  apt-get install -y nodejs npm;
+  ln -s `which nodejs` /usr/local/bin/node;
+fi
+
 ##
 # Setup an install dropbox so we can store our sensitive data
 # like passwords and certs.

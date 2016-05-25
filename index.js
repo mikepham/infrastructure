@@ -27,7 +27,7 @@ function files(path, results, matches, filter) {
   for (var index = 0; index < entries.length; index++) {
     var entry = entries[index]
     var resolved = $path.join(path, entry)
-    var entryStat = $fs.lstatSync(resolved)
+    var entryStat = $fs.statSync(resolved)
     if (entryStat && entryStat.isDirectory()) {
       files(resolved, results, matches, filter)
     } else {
@@ -111,7 +111,7 @@ function transform(composerName, json) {
 /**
  * Entry point to start generating files.
  */
-$fs.lstat(conf, function (err, stat) {
+$fs.stat(conf, function (err, stat) {
   if (err || !stat.isDirectory()) {
     console.log('Infrastructure conf not available.')
     process.exit(1)
@@ -127,7 +127,9 @@ $fs.lstat(conf, function (err, stat) {
 
       // Create the folder so that docker-compose uses that name.
       var composerPath = $path.join(conf, name)
-      if (!$fs.lstatSync(composerPath).isDirectory()) {
+      try {
+        $fs.statSync(composerPath)
+      } catch (e) {
         $fs.mkdir(composerPath)
       }
 
