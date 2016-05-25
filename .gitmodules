@@ -1,6 +1,6 @@
 [submodule "images/teamcity"]
 	path = images/teamcity
-	url = https://github.com/nativecode-dev/teamcity-docker.git
+  url = git@github.com:nativecode-dev/teamcity-docker.git
 [submodule "images/teamcity-agent"]
 	path = images/teamcity-agent
-	url = https://github.com/nativecode-dev/teamcity-agent-docker.git
+  url = git@github.com:nativecode-dev/teamcity-agent-docker.git
