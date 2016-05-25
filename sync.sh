@@ -1,24 +1,15 @@
 #!/bin/bash
 
-BASE=/etc/infrastructure
+BASEPATH=/opt/infrastructure
+SYNCPATH=/etc/infrastructure
 IPADDRESS=`ifconfig eth0 | grep 'inet addr:' | cut -d: -f2 | awk '{print $1}'`
-
-echo "Checking for dependencies...";
-which realpath > /dev/null;
-if [ $? -gt 0 ]; then
-  apt-get update > /dev/null;
-  apt-get install -y realpath;
-fi
-
-SCRIPT=`realpath $0`
-SCRIPTPATH=`dirname $SCRIPT`
 
 echo "Checking if machine has sync folder";
 dropbox list sync | grep $IPADDRESS > /dev/null;
 if [ $? -gt 0 ]; then
   echo "Initializing sync folder for $IPADDRESS...";
   dropbox mkdir sync/$IPADDRESS;
-  $SCRIPTPATH/infrastructure-update.sh download;
+  $BASEPATH/update.sh download;
   if [ $? -gt 0 ]; then
     exit 1;
   fi
@@ -27,17 +18,17 @@ fi
 case "$1" in
   "download")
     echo "Downloading files for $IPADDRESS...";
-    if [ ! -d "$BASE" ]; then
-      mkdir -p $BASE;
+    if [ ! -d "$SYNCPATH" ]; then
+      mkdir -p $SYNCPATH;
     fi
-    dropbox download sync/$IPADDRESS/ $BASE/;
+    dropbox download sync/$IPADDRESS/ $SYNCPATH/;
     exit $?;
   ;;
 
   "upload")
     echo "Uploading files...";
-    dropbox upload $BASE/*.composer sync/$IPADDRESS/;
-    dropbox upload $BASE/certs sync/$IPADDRESS/;
+    dropbox upload $SYNCPATH/*.composer sync/$IPADDRESS/;
+    dropbox upload $SYNCPATH/certs sync/$IPADDRESS/;
     exit $?;
   ;;
 esac
