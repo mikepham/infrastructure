@@ -3,6 +3,28 @@
 BASEPATH=/opt/infrastructure;
 BINPATH=/usr/local/bin
 
+echo "                                                                             ";
+echo "  .__          _____                                                         ";
+echo "  |__|  ____ _/ ____\_______ _____                                           ";
+echo "  |  | /    \\   __\ \_  __ \\__  \                                          ";
+echo "  |  ||   |  \|  |    |  | \/ / __ \_                                        ";
+echo "  |__||___|  /|__|    |__|   (____  /                                        ";
+echo "           \/                     \/                                         ";
+echo "            __                           __                                  ";
+echo "    _______/  |_ _______  __ __   ____ _/  |_  __ __ _______   ___           ";
+echo "   /  ___/\   __\\_  __ \|  |  \_/ ___\\   __\|  |  \\_  __ \_/ __ \         ";
+echo "   \___ \  |  |   |  | \/|  |  /\  \___ |  |  |  |  / |  | \/\  ___/_        ";
+echo "  /____  > |__|   |__|   |____/  \___  >|__|  |____/  |__|    \___  >        ";
+echo "       \/                            \/                           \/         ";
+echo "                                                                             ";
+echo "-----------------------------------------------------------------------------";
+echo "  Infrastructure - https://github.com/nativecode-dev/infrastructure          ";
+echo "  See the license in the repository.                                         ";
+echo "  © 2016 NativeCode Development.                                             ";
+echo "-----------------------------------------------------------------------------";
+echo "  ASCII Art generated with http://bit.ly/1RoZOBn                             ";
+echo "-----------------------------------------------------------------------------";
+
 case "$1" in
   "download")
     $BASEPATH/sync.sh download;
@@ -34,27 +56,6 @@ case "$1" in
   ;;
 
   *)
-    echo "                                                                        ";
-    echo "  .__          _____                                                    ";
-    echo "  |__|  ____ _/ ____\_______ _____                                      ";
-    echo "  |  | /    \\   __\ \_  __ \\__  \                                     ";
-    echo "  |  ||   |  \|  |    |  | \/ / __ \_                                   ";
-    echo "  |__||___|  /|__|    |__|   (____  /                                   ";
-    echo "           \/                     \/                                    ";
-    echo "            __                           __                             ";
-    echo "    _______/  |_ _______  __ __   ____ _/  |_  __ __ _______   ____     ";
-    echo "   /  ___/\   __\\_  __ \|  |  \_/ ___\\   __\|  |  \\_  __ \_/ __ \    ";
-    echo "   \___ \  |  |   |  | \/|  |  /\  \___ |  |  |  |  / |  | \/\  ___/    ";
-    echo "  /____  > |__|   |__|   |____/  \___  >|__|  |____/  |__|    \___  >   ";
-    echo "       \/                            \/                           \/    ";
-    echo "                                                                        ";
-    echo "------------------------------------------------------------------------";
-    echo "  Infrastructure - https://github.com/nativecode-dev/infrastructure     ";
-    echo "  See the license in the repository.                                    ";
-    echo "  © 2016 NativeCode Development.                                        ";
-    echo "------------------------------------------------------------------------";
-    echo "  ASCII Art generated with http://bit.ly/1RoZOBn                        ";
-    echo "------------------------------------------------------------------------";
     echo "                                                                        ";
     echo "  # infrastructure [command]                                            ";
     echo "                                                                        ";

@@ -1,6 +1,7 @@
 #!/bin/bash
 
-echo "Checking for dependencies...";
+echo "";
+echo "    Checking for dependencies. This might take a bit.";
 
 ##
 # Check for the realpath package, which we need below.
@@ -9,8 +10,8 @@ if [ $? -gt 0 ]; then
   apt-get update > /dev/null;
   apt-get install -y realpath;
   if [ $? -gt 0 ]; then
+    echo "";
     echo "Something went horribly wrong!";
-    cd $CALLER;
     exit $?;
   fi
 fi
@@ -18,7 +19,6 @@ fi
 ##
 # Declare variables now that we have realpath.
 BASEPATH=/opt/infrastructure
-CALLER=$PWD
 SCRIPT=`realpath $0`
 SCRIPTPATH=`dirname $SCRIPT`
 IPADDRESS=`ifconfig eth0 | grep 'inet addr:' | cut -d: -f2 | awk '{print $1}'`
@@ -30,8 +30,8 @@ IPADDRESS=`ifconfig eth0 | grep 'inet addr:' | cut -d: -f2 | awk '{print $1}'`
 if [ ! -d $BASEPATH ]; then
   git clone --recursive https://github.com/mikepham/infrastructure.git $BASEPATH;
   if [ $? -gt 0 ]; then
+    echo "";
     echo "Something went horribly wrong!";
-    cd $CALLER;
     exit $?;
   fi
   chmod +x $BASEPATH/infrastructure.sh;
@@ -51,8 +51,8 @@ if [ ! NODE_NORMAL ]; then
     apt-get update > /dev/null;
     apt-get install -y nodejs npm;
     if [ $? -gt 0 ]; then
+      echo "";
       echo "Something went horribly wrong!";
-      cd $CALLER;
       exit $?;
     fi
   fi
@@ -66,27 +66,25 @@ if [ ! -f "/usr/local/bin/dropbox" ]; then
   wget -O /usr/local/bin/dropbox \
     "https://raw.github.com/andreafabrizi/Dropbox-Uploader/master/dropbox_uploader.sh";
   if [ $? -gt 0 ]; then
+    echo "";
     echo "Something went horribly wrong!";
-    cd $CALLER;
     exit $?;
   fi
   chmod +x /usr/local/bin/dropbox;
-  echo "Plesure configure dropbox before continuing.";
-  exit 1;
 fi
 
 ##
 # Install the dependencies listed in the package.json file,
 # which we need to run the JS files.
 if [ -d "node_modules" ]; then
-  npm update --production --silent;
+  npm update --production --silent > /dev/null;
 else
-  npm install --production --silent;
+  npm install --production --silent > /dev/null;
 fi
 
 if [ $? -gt 0 ]; then
+  echo "";
   echo "Something went horribly wrong!";
-  cd $CALLER;
   exit $?;
 fi
 
@@ -94,12 +92,36 @@ fi
 # Create symlink.
 LINK_PATH=/usr/local/bin/infrastructure
 if [ ! -L $LINK_PATH ]; then
-  echo "Creating symlink...";
+  echo -n "    Creating symlink...";
   ln -s /opt/infrastructure/infrastructure.sh $LINK_PATH;
+  echo "done.";
 fi
 
-echo "Hey! If we made it this far, everything installed!";
-echo "You'll need to setup your dropbox. We recommend creating an app folder.";
-echo "Just type 'dropbox' and follow the instructions.";
-
-cd $CALLER;
+echo "                                                                             ";
+echo "*****************************************************************************";
+echo "                                                                             ";
+echo "  My part is done. I'm getting off this hamster wheel while you do the rest. ";
+echo "                                                                             ";
+echo "*****************************************************************************";
+echo "                                                                             ";
+echo "  Almost there! We need a place to store our super secret sauce recipes and  ";
+echo "  we will use Dropbox for that. Because we're opinionated that way.          ";
+echo "                                                                             ";
+echo "  Please see the github wiki for documentation on how syncing works. In the  ";
+echo "  meantime, we recommmend you read this article for how to set up dropbox.   ";
+echo "                                                                             ";
+echo "    http://xmodulo.com/access-dropbox-command-line-linux.html                ";
+echo "                                                                             ";
+echo "*****************************************************************************";
+echo "                                                                             ";
+echo "  REQUIRED: Configure dropbox.                                               ";
+echo "                                                                             ";
+echo "  OPTIONAL: Run the sample composer file.                                    ";
+echo "                                                               . _           ";
+echo "       > cd /etc/infrastrcture                              .--H\LC__        ";
+echo "       > infrastructure generate                       -_--\\ 'H\_/__L       ";
+echo "       > cd demo                                   - --_ _-] :)=(_L__        ";
+echo "       > docker-composer build                       - ----// .H/\\__T       ";
+echo "       > docker-composer up                                 '--H-^~          ";
+echo "                                                                '            ";
+echo "*****************************************************************************";
