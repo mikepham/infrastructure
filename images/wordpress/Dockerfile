@@ -1,2 +1,4 @@
 FROM wordpress:latest
-RUN pecl install zip
+RUN set -x \
+  docker-php-ext-install zip \
+;
