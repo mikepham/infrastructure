@@ -23,9 +23,14 @@ if [ ! -d "$TEAMCITY_AGENT_PATH/bin" ]; then
         fi
     done
     wget $TEAMCITY_SERVER_URL/update/buildAgent.zip && unzip -d $TEAMCITY_AGENT_PATH buildAgent.zip && rm buildAgent.zip
+    if [ $? -gt 0 ]; then
+      echo "Failed to unzip archive for agent."
+      exit 1;
+    fi
     chmod +x $TEAMCITY_AGENT_PATH/bin/agent.sh
     echo "serverUrl=${TEAMCITY_SERVER_URL}" > $TEAMCITY_AGENT_PATH/conf/buildAgent.properties
     if [ ! -z "$TEAMCITY_AGENT_NAME" ]; then
+      echo "Setting agent name to $TEAMCITY_AGENT_NAME"
       echo "name=$TEAMCITY_AGENT_NAME" >> $TEAMCITY_AGENT_PATH/conf/buildAgent.properties
     fi
 fi
