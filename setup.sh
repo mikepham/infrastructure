@@ -45,9 +45,9 @@ cd $BASEPATH;
 # their file to nodejs, so we'll create a symlink if
 # it doesn't already exist.
 NODE_NORMAL=`which node`;
-NODE_UBUNTU=`which nodejs`;
-if [ ! NODE_NORMAL ]; then
-  if [ ! NODE_UBUNTU ]; then
+if [ $? -gt 0 ]; then
+  NODE_UBUNTU=`which nodejs`;
+  if [ $? -gt 0 ]; then
     apt-get update > /dev/null;
     apt-get install -y nodejs npm;
     if [ $? -gt 0 ]; then
@@ -56,7 +56,9 @@ if [ ! NODE_NORMAL ]; then
       exit $?;
     fi
   fi
+  echo -n "    Creating node symlink...";
   ln -s `which nodejs` /usr/local/bin/node;
+  echo "done."
 fi
 
 ##

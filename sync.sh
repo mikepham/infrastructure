@@ -9,7 +9,7 @@ dropbox list sync | grep $IPADDRESS > /dev/null;
 if [ $? -gt 0 ]; then
   echo "Initializing sync folder for $IPADDRESS...";
   dropbox mkdir sync/$IPADDRESS;
-  $BASEPATH/update.sh download;
+  $BASEPATH/sync.sh download;
   if [ $? -gt 0 ]; then
     exit 1;
   fi
