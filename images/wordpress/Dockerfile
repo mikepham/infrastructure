@@ -1,2 +1,2 @@
 FROM wordpress:latest
-RUN pecl install imagick zip
+RUN pecl install zip
