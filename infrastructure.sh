@@ -26,11 +26,6 @@ echo "  ASCII Art generated with http://bit.ly/1RoZOBn                          
 echo "-----------------------------------------------------------------------------";
 
 case "$1" in
-  "down"|"download")
-    $BASEPATH/sync.sh download;
-    exit $?;
-  ;;
-
   "gen"|"generate")
     node $BASEPATH/index.js;
     exit $?;
@@ -50,31 +45,59 @@ case "$1" in
     exit $?;
   ;;
 
-  "up"|"upload")
-    $BASEPATH/sync.sh upload;
-    exit $?;
+  "sync")
+    case "$2" in
+      "down"|"download")
+        $BASEPATH/sync.sh download;
+        exit $?;
+      ;;
+
+      "up"|"upload")
+        $BASEPATH/sync.sh upload;
+        exit $?;
+      ;;
+
+      *)
+        echo;
+        echo "  sync (upload|download)";
+        echo;
+        echo "    download                                                            ";
+        echo "      - Downloads composer files from a dropbox location.               ";
+        echo;
+        echo "    upload                                                              ";
+        echo "      - Uploads composer files to a dropbox location.                   ";
+        echo;
+        exit 1;
+      ;;
+    esac
   ;;
 
   *)
-    echo "                                                                        ";
+    echo;
     echo "  # infrastructure [command]                                            ";
-    echo "                                                                        ";
+    echo;
     echo "    Commands                                                            ";
-    echo "                                                                        ";
-    echo "    download      - Downloads composer files from a dropbox location.   ";
-    echo "    generate      - Generates docker-compose.yml files.                 ";
-    echo "    remove        - Removes installed symlinks.                         ";
-    echo "    setup         - Configures the machine as a deployment target.      ";
-    echo "    upload        - Uploads composer files to a dropbox location.       ";
-    echo "                                                                        ";
+    echo;
+    echo "    generate [path]                                                     ";
+    echo "      - Generates docker-compose.yml files.                             ";
+    echo;
+    echo "    remove                                                              ";
+    echo "      - Removes installed symlinks.                                     ";
+    echo;
+    echo "    setup                                                               ";
+    echo "      - Configures the machine as a deployment target.                  ";
+    echo;
+    echo "    sync (upload|download)                                              ";
+    echo "      - Configures the machine as a deployment target.                  ";
+    echo;
     echo "    Opinionated locations:                                              ";
-    echo "                                                                        ";
+    echo;
     echo "    /etc/infrastructure         - location of composer files.           ";
     echo "    /etc/infrastructure/<name>  - location of generated composer files. ";
     echo "    /opt/infrastructure         - location of local git repository.     ";
     echo "    /usr/share/<name>           - location of composer volumes.         ";
-    echo "                                                                        ";
-    echo "                                                                        ";
+    echo;
+    echo;
     echo "  BASE    : $BASEPATH                                                   ";
     echo "  BIN     : $BINPATH                                                    ";
   ;;

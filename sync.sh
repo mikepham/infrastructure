@@ -28,7 +28,9 @@ case "$1" in
   "upload")
     echo "Uploading files...";
     dropbox upload $SYNCPATH/*.composer sync/$IPADDRESS/;
-    dropbox upload $SYNCPATH/certs sync/$IPADDRESS/;
+    if [ -d "$SYNCPATH/certs" ]; then
+      dropbox upload $SYNCPATH/certs sync/$IPADDRESS/;
+    fi
     exit $?;
   ;;
 esac
