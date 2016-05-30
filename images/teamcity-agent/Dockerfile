@@ -13,7 +13,6 @@ MAINTAINER support@nativecode.com
 ENV GOSU_VERSION                  1.7
 ENV NODE_NPM_VERSION              3.5.2
 ENV NODE_VERSION                  4.4.4
-ENV TEAMCITY_AGENT_NPM_REGISTRY   https://npm.nativecode.com/
 ENV TEAMCITY_SERVER_PATH          http://localhost
 ENV TERM                          dumb
 WORKDIR /data
@@ -87,7 +86,6 @@ RUN set -x \
   && tar -xzf "node-v$NODE_VERSION-linux-x64.tar.gz" -C /usr/local --strip-components=1 \
   && rm "node-v$NODE_VERSION-linux-x64.tar.gz" SHASUMS256.txt.asc \
   # Install nodejs global dependencies.
-  && npm config set registry "$TEAMCITY_AGENT_NPM_REGISTRY" \
   && npm install --global "npm@$NODE_NPM_VERSION" \
   && npm install --global \
       grunt-cli gulp-cli \
