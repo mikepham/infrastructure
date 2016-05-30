@@ -2,6 +2,8 @@
 FROM ubuntu:xenial
 MAINTAINER support@nativecode.com
 
+ENV NPM_REGISTRY=https://registry.npmjs.org/
+
 ##
 # Setup some environment variables we'll need later.
 #   GOSU_VERSION            version of gosu to install.
@@ -78,7 +80,7 @@ RUN set -x \
   ; do \
     gpg --keyserver ha.pool.sks-keyservers.net --recv-keys "$key"; \
   done \
-  # Download and install node.
+  # Download and install node.js.
   && curl -SLO "https://nodejs.org/dist/v$NODE_VERSION/node-v$NODE_VERSION-linux-x64.tar.gz" \
   && curl -SLO "https://nodejs.org/dist/v$NODE_VERSION/SHASUMS256.txt.asc" \
   && gpg --verify SHASUMS256.txt.asc \
@@ -86,9 +88,10 @@ RUN set -x \
   && tar -xzf "node-v$NODE_VERSION-linux-x64.tar.gz" -C /usr/local --strip-components=1 \
   && rm "node-v$NODE_VERSION-linux-x64.tar.gz" SHASUMS256.txt.asc \
   # Install nodejs global dependencies.
-  && npm install --global --production --silent \
+  && npm config set registry "$NPM_REGISTRY" \
+  && npm install --global --silent \
        "npm@$NPM_VERSION" \
-  && npm install --global --production --silent \
+  && npm install --global --silent \
       grunt-cli gulp-cli \
   && npm cache clear \
   # Install gosu
