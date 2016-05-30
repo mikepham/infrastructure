@@ -89,9 +89,9 @@ RUN set -x \
   && rm "node-v$NODE_VERSION-linux-x64.tar.gz" SHASUMS256.txt.asc \
   # Install nodejs global dependencies.
   && npm config set registry "$NPM_REGISTRY" \
-  && npm install --global --silent \
+  && npm install --global \
        "npm@$NPM_VERSION" \
-  && npm install --global --silent \
+  && npm install --global \
       grunt-cli gulp-cli \
   && npm cache clear \
   # Install gosu
