@@ -21,16 +21,15 @@ case "$1" in
     if [ ! -d "$SYNCPATH" ]; then
       mkdir -p $SYNCPATH;
     fi
-    dropbox download sync/$IPADDRESS/ $SYNCPATH/;
+    dropbox -h -p download sync/$IPADDRESS/certs $SYNCPATH/;
+    dropbox -h -p download sync/$IPADDRESS/composers $SYNCPATH/;
     exit $?;
   ;;
 
   "upload")
     echo "Uploading files...";
-    dropbox upload $SYNCPATH/*.composer sync/$IPADDRESS/;
-    if [ -d "$SYNCPATH/certs" ]; then
-      dropbox upload $SYNCPATH/certs sync/$IPADDRESS/;
-    fi
+    dropbox -h -p -s upload $SYNCPATH/certs sync/$IPADDRESS/;
+    dropbox -h -p -s upload $SYNCPATH/composers sync/$IPADDRESS/;
     exit $?;
   ;;
 esac

@@ -1,7 +1,8 @@
 #!/bin/bash
 
 BASEPATH=/opt/infrastructure;
-BINPATH=/usr/local/bin
+BINPATH=/usr/local/bin;
+CONFPATH=/etc/infrastructure;
 
 echo "                                                                             ";
 echo "  .__          _____                                                         ";
@@ -29,6 +30,12 @@ case "$1" in
   "gen"|"generate")
     node $BASEPATH/index.js;
     exit $?;
+  ;;
+
+  "init")
+    echo "Creating default sync folders.";
+    sudo mkdir -p $CONFPATH/certs;
+    sudo mkdir -p $CONFPATH/composers;
   ;;
 
   "rm"|"remove")
